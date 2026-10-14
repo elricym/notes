@@ -4,7 +4,7 @@
 @media (prefers-color-scheme:dark){:root{--bg:#262624;--fg:#F0EEE6;--body:#E8E6DC;--muted:#9C9A92;--line:#3A3936;--accent:#D97757;--card:#2C2C2A;--code:#30302E}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--body);font:17px/1.8 var(--serif);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--bg);color:var(--body);font:16px/1.85 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .wrap{max-width:700px;margin:0 auto;padding:0 28px}
 a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent)}
 a:hover{text-decoration-color:var(--accent)}

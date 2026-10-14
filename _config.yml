@@ -6,3 +6,6 @@ defaults:
   - scope: {path: ""}
     values: {layout: default}
 exclude: [README.md]
+markdown: kramdown
+kramdown:
+  input: GFM

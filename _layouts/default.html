@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{% if page.title and page.title != "首页" %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v=2">
+</head>
+<body>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <nav>
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="on"{% endif %}>首页</a>
+    <a href="{{ '/market/' | relative_url }}"{% if page.url contains '/market/' %} class="on"{% endif %}>美股复盘</a>
+    <a href="{{ '/notes/' | relative_url }}"{% if page.url contains '/notes/' %} class="on"{% endif %}>笔记</a>
+  </nav>
+</div></header>
+<main class="wrap">
+{% if page.listing %}
+  {% if page.listing == 'all' %}<section class="hero"><h1>{{ site.title }}</h1><p>{{ site.description }}</p></section>
+  {% else %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+  {% assign entries = site.pages | where_exp: "p", "p.date" | sort: "date" | reverse %}
+  {% if page.listing != 'all' %}{% assign entries = entries | where: "category", page.listing %}{% endif %}
+  {% if entries.size > 0 %}
+  <ul class="entries">
+  {% for p in entries %}
+    <li><a href="{{ p.url | relative_url }}"><time>{{ p.date | date: "%Y-%m-%d" }}</time><span class="t">{{ p.title }}</span>{% if page.listing == 'all' %}<span class="tag">{% if p.category == 'market' %}复盘{% else %}笔记{% endif %}</span>{% endif %}</a></li>
+  {% endfor %}
+  </ul>
+  {% else %}<p class="empty">暂无内容</p>{% endif %}
+{% else %}
+  <article class="post">
+    {% if page.date %}<p class="meta"><time>{{ page.date | date: "%Y-%m-%d" }}</time>{% if page.category == 'market' %} · 美股复盘{% endif %}</p>{% endif %}
+    {{ content }}
+  </article>
+  <p class="back"><a href="{{ '/' | relative_url }}">← 返回首页</a></p>
+{% endif %}
+</main>
+<footer class="wrap foot">© {{ site.time | date: "%Y" }} Ming</footer>
+</body>
+</html>
